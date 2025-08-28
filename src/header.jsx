@@ -1,45 +1,31 @@
-import { Link, useLocation } from "react-router-dom";
+import { FaMoon, FaSun } from "react-icons/fa";
+
 
 export default function Header({ darkMode, setDarkMode }) {
-  const location = useLocation();
-
   return (
-    <header className="bg-blue-600 text-white p-4 relative">
-      <h1 className="text-xl font-bold">Formulário</h1>
-
-      <button
-        type="button"
-        onClick={() => setDarkMode(!darkMode)}
-        className={`absolute top-2.5 right-4 px-4 py-2 rounded-lg transition 
-          ${darkMode ? "bg-white text-black hover:bg-gray-200" : "bg-black text-white hover:bg-gray-800"}`}
-      >
-        {darkMode ? "Modo Claro" : "Modo Escuro"}
-      </button>
+    <header className={`flex justify-between items-center py-6 px-6 md:px-12 shadow-md sticky top-0 z-50 transition-colors duration-500 ${darkMode ? 'bg-blue-950' : 'bg-blue-200'}`}>
+      <h1 className={`text-2xl font-bold ${darkMode ? 'text-blue-300' : 'text-blue-700'}`}>
+        Portfólio — Pedro Henrique
+      </h1>
 
 
-      <nav className={`absolute top-2.5 right-40 px-4 py-2 rounded-lg transition 
-          ${darkMode ? "bg-white text-black hover:bg-gray-200" : "bg-black text-white hover:bg-gray-800"}`}>
-        <Link
-          to="/institutional"
-          className={`hover:underline ${location.pathname === "/institutional" ? "" : ""
-            }`}
+      <div className="flex items-center gap-3">
+        <nav className="hidden md:flex gap-6 mr-4 text-sm font-medium">
+          <a href="#hero" className={`hover:underline ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>Home</a>
+          <a href="#about" className={`hover:underline ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>Sobre</a>
+          <a href="#projects" className={`hover:underline ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>Projetos</a>
+          <a href="#contact" className={`hover:underline ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>Contato</a>
+        </nav>
+
+
+        <button
+          onClick={() => setDarkMode(!darkMode)}
+          className={`p-2 rounded-full transition-transform hover:scale-105 ${darkMode ? 'bg-blue-800' : 'bg-white'}`}
+          aria-label="Alternar modo escuro"
         >
-          Institucional
-        </Link>
-      </nav>
-
-
-
-      <nav className={`absolute top-2.5 right-76 px-4 py-2 rounded-lg transition 
-          ${darkMode ? "bg-white text-black hover:bg-gray-200" : "bg-black text-white hover:bg-gray-800"}`}>
-        <Link
-          to="/"
-          className={`hover:underline ${location.pathname === "/" ? "" : ""
-            }`}
-        >
-          Home
-        </Link>
-      </nav>
+          {darkMode ? <FaSun className="text-yellow-400" /> : <FaMoon className="text-blue-600" />}
+        </button>
+      </div>
     </header>
   );
 }
